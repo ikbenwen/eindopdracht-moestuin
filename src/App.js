@@ -1,25 +1,45 @@
-import logo from './logo.svg';
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 import './App.css';
 
 function App() {
+  const { handleSubmit, register, errors } = useForm();
+
+  function onFormSubmit(data) {
+    data.preventDefault();
+    console.log(data);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+      <form onSubmit={handleSubmit(onFormSubmit)}>
+        <fieldset>
+          <legend>Gegevens</legend>
+          <label htmlFor="details-name">
+            username:
+            <input
+            type="text"
+            name="username"
+            id="details-name"
+            ref={register({ required: true })}
+            />
+          </label>
+          {errors.username && <p>Dit veld is verplicht</p>}
+
+          <label htmlFor="details-email">
+            email:
+            <input
+            type="text"
+            name="email"
+            id="details-email"
+            ref={register({ required: true })}
+            />
+          </label>
+          {errors.email && <p>Dit veld is verplicht</p>}
+
+        </fieldset>
+          <button type="submit" >submit</button>
+      </form>
+  )
 }
 
 export default App;
