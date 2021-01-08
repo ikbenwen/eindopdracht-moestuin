@@ -1,45 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, Component } from "react";
 import { useForm } from "react-hook-form";
 import './App.css';
+import './components/RegistrationForm.css'
 
-function App() {
-  const { handleSubmit, register, errors } = useForm();
 
-  function onFormSubmit(data) {
-    data.preventDefault();
-    console.log(data);
-  }
+import RegistrationForm from "./components/RegistrationForm";
 
+//
+function App () {
   return (
-      <form onSubmit={handleSubmit(onFormSubmit)}>
-        <fieldset>
-          <legend>Gegevens</legend>
-          <label htmlFor="details-name">
-            username:
-            <input
-            type="text"
-            name="username"
-            id="details-name"
-            ref={register({ required: true })}
-            />
-          </label>
-          {errors.username && <p>Dit veld is verplicht</p>}
-
-          <label htmlFor="details-email">
-            email:
-            <input
-            type="text"
-            name="email"
-            id="details-email"
-            ref={register({ required: true })}
-            />
-          </label>
-          {errors.email && <p>Dit veld is verplicht</p>}
-
-        </fieldset>
-          <button type="submit" >submit</button>
-      </form>
-  )
-}
+      <div className="App">
+        <RegistrationForm/>
+      </div>
+  );
+};
 
 export default App;
